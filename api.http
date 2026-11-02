@@ -1,0 +1,8 @@
+GET https://randomuser.me/api/?results=2
+
+POST http://127.0.0.1:8000/movies?message=coucou
+Content-Type: application/json
+
+{
+	"test": "coucou"
+}
