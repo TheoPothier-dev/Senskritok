@@ -1,4 +1,4 @@
-# SensKritok — API REST avec Symfony
+# SensKritok — API avec Symfony
 
 J'ai réalisé ce projet dans le cadre du cours de 2 année **Framework PHP : API** ([support de cours](https://alban-crepel.com/cours/mds/php-api)).
 
