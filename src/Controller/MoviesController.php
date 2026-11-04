@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\Repository\CategoryRepository;
+use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class MoviesController extends AbstractController
 {
-    #[Route('/movies', name: 'senskritok', methods: ['POST'])]
+    #[Route('/movies', name: 'add_movies', methods: ['POST'])]
     public function createMovie(
         EntityManagerInterface $entityManager,
         Request $request,
@@ -52,6 +53,19 @@ final class MoviesController extends AbstractController
         return $this->json($createdMovie, Response::HTTP_OK, [], ['groups' => ['movie:read']]);
     }
 
-    
+    #[Route('/movies', name: 'list_movies', methods: ['GET'])]
+    public function getMovie(
+        Request $request,
+        MovieRepository $movieRepository
+    ): JsonResponse
+    {
+        $title = $request->query->get('title');
+        $year = $request->query->get('year');
+
+        $movieList = $movieRepository->findMovie($title, $year);
+
+    return $this->json($movieList, Response::HTTP_OK, [], ['groups' => ['movie:read']]);
+        
+    }
 
 }

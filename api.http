@@ -15,7 +15,7 @@ GET http://127.0.0.1:8000/movies
 POST {{baseURL}}/test
 ###
 
-POST {{baseURL}}/movie
+POST {{baseURL}}/movies
 Content-Type: application/json
 {
 	"title": "Interstellar",
@@ -25,3 +25,6 @@ Content-Type: application/json
 }
 ###
 GET {{baseURL}}/movies
+###
+
+GET {{baseURL}}/movies?title=Dune 3
