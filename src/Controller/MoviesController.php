@@ -70,4 +70,22 @@ final class MoviesController extends AbstractController
         
     }
 
+    #[Route('/movies/{id}', name: 'delete_movie', methods: ['DELETE'])]
+    public function deleteMovie(
+        int $id,
+        MovieRepository $movieRepository,
+        EntityManagerInterface $entityManager
+    ): JsonResponse
+    {
+        //supprime le film en fonction de son id
+        $movie = $movieRepository->find($id);
+        $entityManager->remove($movie);
+        $entityManager->flush();
+
+        //renvoie la liste à jour
+        $movies = $movieRepository->findAll();
+
+        return $this->json($movies, Response::HTTP_OK, [], ['groups' => ['movie:read']]);
+    }
+
 }
