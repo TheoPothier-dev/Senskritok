@@ -1,4 +1,7 @@
+@baseURL=http://127.0.0.1:8000
+###
 GET https://randomuser.me/api/?results=2
+###
 
 POST http://127.0.0.1:8000/movies?message=coucou
 Content-Type: application/json
@@ -6,3 +9,19 @@ Content-Type: application/json
 {
 	"test": "coucou"
 }
+###
+GET http://127.0.0.1:8000/movies
+###
+POST {{baseURL}}/test
+###
+
+POST {{baseURL}}/movie
+Content-Type: application/json
+{
+	"title": "Interstellar",
+	"description": "Film de Nolan",
+	"year": 2014,
+	"categories": [1, 3]
+}
+###
+GET {{baseURL}}/movies

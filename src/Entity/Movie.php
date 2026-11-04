@@ -6,6 +6,7 @@ use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 class Movie
@@ -13,20 +14,26 @@ class Movie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?int $id = null;
 
+    #[Groups(['movie:read', 'movie:write'])]
     #[ORM\Column(length: 255)]
-    private ?string $tilte = null;
+    private ?string $title = null;
 
+    #[Groups(['movie:read', 'movie:write'])]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
+    #[Groups(['movie:read', 'movie:write'])]
     #[ORM\Column]
     private ?int $year = null;
+
 
     /**
      * @var Collection<int, Category>
      */
+    #[Groups(['movie:read', 'movie:write'])]
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'Category')]
     private Collection $categories;
 
@@ -40,14 +47,14 @@ class Movie
         return $this->id;
     }
 
-    public function getTilte(): ?string
+    public function getTitle(): ?string
     {
-        return $this->tilte;
+        return $this->title;
     }
 
-    public function setTilte(string $tilte): static
+    public function setTitle(string $title): static
     {
-        $this->tilte = $tilte;
+        $this->title = $title;
 
         return $this;
     }
