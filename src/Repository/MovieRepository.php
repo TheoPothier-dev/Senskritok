@@ -21,10 +21,12 @@ class MovieRepository extends ServiceEntityRepository
      */
     public function findMovie(?string $title, ?int $year)
    {
+        //configuration de l'affichage si aucun tri n'est effectué
         $qb = $this->createQueryBuilder('m')
             ->orderBy('m.title', 'ASC')
             ->setMaxResults(5);
 
+        //filtre en fonction du titre
         if ($title) {
             $qb
            ->andWhere('m.title = :title')
@@ -32,6 +34,7 @@ class MovieRepository extends ServiceEntityRepository
            
         }
 
+        //filtre en fonction de l'année
         if ($year) {
             $qb 
             ->andWhere('m.year = :year')
@@ -41,16 +44,5 @@ class MovieRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
 
-
-
-//    public function findOneBySomeField($value): ?Movie
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
     }
 }

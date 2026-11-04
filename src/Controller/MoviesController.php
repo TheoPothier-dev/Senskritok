@@ -59,9 +59,11 @@ final class MoviesController extends AbstractController
         MovieRepository $movieRepository
     ): JsonResponse
     {
+        //définition des variables pour le filtre
         $title = $request->query->get('title');
         $year = $request->query->get('year');
 
+        //stock les films triés à afficher
         $movieList = $movieRepository->findMovie($title, $year);
 
     return $this->json($movieList, Response::HTTP_OK, [], ['groups' => ['movie:read']]);

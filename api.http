@@ -28,3 +28,6 @@ GET {{baseURL}}/movies
 ###
 
 GET {{baseURL}}/movies?title=Dune 3
+###
+
+GET {{baseURL}}/movies?year=2026
